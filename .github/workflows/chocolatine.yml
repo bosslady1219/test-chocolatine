@@ -12,9 +12,7 @@ env:
 jobs:
   check_compilation_and_coding_style:
     runs-on: ubuntu-latest
-    if: |
-      !startsWith(github.ref_name, 'no-ga/') &&
-      !contains(env.MIRROR_SSH_URL, github.repository)
+    if: ${{ !startsWith(github.ref_name, 'no-ga/') && !contains(env.MIRROR_SSH_URL, github.repository) }}
     steps:
       -name: Checkout repository
        uses: actions/checkout@v4
