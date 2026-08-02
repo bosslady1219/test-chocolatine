@@ -14,9 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ !startsWith(github.ref_name, 'no-ga/') && !contains(env.MIRROR_SSH_URL, github.repository) }}
     steps:
-      -name: Checkout repository
-      uses: actions/checkout@v4
-      -name: Debug info
-       run: |
-         echo "Branch: ${{ github.ref_name }}"
-         echo "Repository: ${{ github.repository }}"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Debug info
+        run: |
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Repository: ${{ github.repository }}"
