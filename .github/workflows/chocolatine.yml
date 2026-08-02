@@ -1,0 +1,24 @@
+name: Chocolatine
+
+on:
+  push:
+  pull_request:
+    types: [opened]
+
+env:
+  MIRROR_SSH_URL: "git@git.epitech.eu:/..."
+  EXECUTABLES: "mon_executable"
+
+jobs:
+  check_compilation_and_coding_style:
+    runs-on: ubuntu-latest
+    if: |
+      !startsWith(github.ref_name, 'no-ga/') &&
+      !contains(env.MIRROR_SSH_URL, github.repository)
+    steps:
+      -name: Checkout repository
+       uses: actions/checkout@v4
+      -name: Debug info
+       run: |
+         echo "Branch: ${{ github.ref_name }}"
+         echo "Repository: ${{ github.repository }}"

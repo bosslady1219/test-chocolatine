@@ -1,0 +1,10 @@
+name: Chocolatine
+
+on:
+  push:
+  pull_request:
+    types: [opened]
+
+env:
+  MIRROR_SSH_URL: "git@git.epitech.eu:/..."
+  EXECUTABLES: "mon_executable"
