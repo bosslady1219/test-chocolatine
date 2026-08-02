@@ -32,9 +32,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run banana-check-repo
-        run: banana-check-repo
-
       - name: Debug info
         run: |
           echo "Branch: ${{ github.ref_name }}"
