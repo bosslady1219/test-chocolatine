@@ -15,7 +15,7 @@ jobs:
     if: ${{ !startsWith(github.ref_name, 'no-ga/') && !contains(env.MIRROR_SSH_URL, github.repository) }}
     steps:
       -name: Checkout repository
-       uses: actions/checkout@v4
+      uses: actions/checkout@v4
       -name: Debug info
        run: |
          echo "Branch: ${{ github.ref_name }}"
