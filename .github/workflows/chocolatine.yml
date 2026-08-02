@@ -10,9 +10,23 @@ env:
   EXECUTABLES: "mon_executable"
 
 jobs:
-  check_compilation_and_coding_style:
+  gate:
     runs-on: ubuntu-latest
-    if: ${{ !startsWith(github.ref_name, 'no-ga/') && !contains(env.MIRROR_SSH_URL, github.repository) }}
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+    steps:
+      - id: check
+        run: |
+          if [[ "${{ github.ref_name }}" == no-ga/* ]] || [[ "$MIRROR_SSH_URL" == *"${{ github.repository }}"* ]]; then
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  check_compilation_and_coding_style:
+    needs: gate
+    if: needs.gate.outputs.should_run == 'true'
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
